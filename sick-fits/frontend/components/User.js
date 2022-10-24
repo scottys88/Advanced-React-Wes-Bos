@@ -1,5 +1,4 @@
 import { gql, useQuery } from '@apollo/client';
-import React from 'react';
 
 export const CURRENT_USER_QUERY = gql`
   query {
@@ -8,18 +7,28 @@ export const CURRENT_USER_QUERY = gql`
         id
         email
         name
-        #   Query cart when have it
+        cart {
+          id
+          quantity
+          product {
+            id
+            price
+            name
+            description
+            photo {
+              image {
+                publicUrlTransformed
+              }
+            }
+          }
+        }
       }
     }
   }
 `;
 
 export function useUser() {
-  const data = useQuery(CURRENT_USER_QUERY);
+  const { data } = useQuery(CURRENT_USER_QUERY);
 
   return data?.authenticatedItem;
-}
-
-export default function User() {
-  return <div>User</div>;
 }

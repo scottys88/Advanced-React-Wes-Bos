@@ -24,7 +24,6 @@ export default function useForm(initial = {}) {
   };
 
   useEffect(() => {
-    console.log('hey');
     setInputs(initial);
   }, [initialValues]);
 
